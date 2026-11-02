@@ -30,3 +30,15 @@ jobs:
 
       - name: Run Automated Tests
         run: python -m pytest -v
+
+      - name: Prepare Deployment Package
+        run: |
+          mkdir deployment
+          cp model.pkl deployment/
+          cp requirements.txt deployment/
+
+      - name: Upload Deployment Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ml-model-deployment
+          path: deployment/
